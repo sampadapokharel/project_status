@@ -19,7 +19,7 @@ At the end of a session: Claude updates the file to reflect what changed.
 
 ```bash
 mkdir -p ~/.claude/plugins/marketplaces/sampu-plugins/plugins
-git clone https://github.com/sampu/claude-project-status \
+git clone https://github.com/sampadapokharel/claude_project_status \
   ~/.claude/plugins/marketplaces/sampu-plugins/plugins/project-status
 ```
 
