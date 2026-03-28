@@ -28,7 +28,7 @@ if [ -n "$STAGED_DIFF" ]; then
 
   # ── 1. PROJECT_STATUS.md — create if missing, update if present ────────────
   if [ ! -f "PROJECT_STATUS.md" ]; then
-    claude --print "
+    claude --dangerouslySkipPermissions --print "
 You are creating PROJECT_STATUS.md for the first time before a git commit.
 Focus: progress tracking and tasks. Style: concise, structured.
 
@@ -51,7 +51,7 @@ Steps:
 5. Write PROJECT_STATUS.md to the project root.
 " > /dev/null 2>&1
   else
-    claude --print "
+    claude --dangerouslySkipPermissions --print "
 You are updating PROJECT_STATUS.md before a git commit.
 Focus: progress tracking and tasks. Style: concise, structured.
 
@@ -71,7 +71,7 @@ Steps:
   # ── 2. README.md — update when features or setup changes detected ───────────
   FEATURE_CHANGES=$(echo "$STAGED_STAT" | grep -E "(features/|screens/|pages/|components/|package\.json|app\.json|next\.config|requirements)" | head -5)
   if [ -n "$FEATURE_CHANGES" ]; then
-    claude --print "
+    claude --dangerouslySkipPermissions --print "
 You are updating README.md based on feature or setup changes in this commit.
 Focus: clarity for humans. Style: polished, external-facing prose. No status language (no ✅/🚧/❌).
 
@@ -94,7 +94,7 @@ Steps:
   # ── 3. CLAUDE.md — update when architecture or structure changes detected ───
   ARCH_CHANGES=$(echo "$STAGED_STAT" | grep -E "(src/|services/|store/|types/|config/|middleware|layout\.|new file mode)" | head -5)
   if [ -n "$ARCH_CHANGES" ]; then
-    claude --print "
+    claude --dangerouslySkipPermissions --print "
 You are updating CLAUDE.md based on architectural changes in this commit.
 Focus: helping Claude navigate and reason about this codebase. Style: bullet points, fast-parseable.
 
@@ -132,7 +132,7 @@ fi
 
 # ── 1. PROJECT_STATUS.md — create if missing, update if present ──────────────
 if [ ! -f "PROJECT_STATUS.md" ]; then
-  claude --print "
+  claude --dangerouslySkipPermissions --print "
 You are creating PROJECT_STATUS.md for the first time before a git commit.
 Focus: progress tracking and tasks. Style: concise, structured.
 
@@ -155,7 +155,7 @@ Steps:
 5. Write PROJECT_STATUS.md to the project root.
 " > /dev/null 2>&1
 else
-  claude --print "
+  claude --dangerouslySkipPermissions --print "
 You are updating PROJECT_STATUS.md before a git commit.
 Focus: progress tracking and tasks. Style: concise, structured.
 
@@ -175,7 +175,7 @@ git add PROJECT_STATUS.md 2>/dev/null || true
 # ── 2. README.md — update when features or setup changes detected ─────────────
 FEATURE_CHANGES=$(echo "$STAGED_STAT" | grep -E "(features/|screens/|pages/|components/|package\.json|app\.json|next\.config|requirements)" | head -5)
 if [ -n "$FEATURE_CHANGES" ]; then
-  claude --print "
+  claude --dangerouslySkipPermissions --print "
 You are updating README.md based on feature or setup changes in this commit.
 Focus: clarity for humans. Style: polished, external-facing prose. No status language (no ✅/🚧/❌).
 
@@ -198,7 +198,7 @@ fi
 # ── 3. CLAUDE.md — update when architecture or structure changes detected ──────
 ARCH_CHANGES=$(echo "$STAGED_STAT" | grep -E "(src/|services/|store/|types/|config/|middleware|layout\.|new file mode)" | head -5)
 if [ -n "$ARCH_CHANGES" ]; then
-  claude --print "
+  claude --dangerouslySkipPermissions --print "
 You are updating CLAUDE.md based on architectural changes in this commit.
 Focus: helping Claude navigate and reason about this codebase. Style: bullet points, fast-parseable.
 
