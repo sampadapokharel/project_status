@@ -10,9 +10,6 @@ Read the file `PROJECT_STATUS.md` from the current working directory (the projec
 
 Present its contents as a clean, easy-to-scan brief. Preserve the status icons (✅/🚧/❌) and table formatting. Do not truncate any sections.
 
-End with:
-> **Reminder**: Update `PROJECT_STATUS.md` at the end of this session — specifically the **Last Session**, **Next Priorities**, and any status flags (✅/🚧/❌) that changed.
-
 ## If the file does NOT exist
 
 Auto-generate it by scanning the project. Follow these steps:
@@ -82,3 +79,28 @@ Then write a filled-in `PROJECT_STATUS.md` to the project root using this struct
 
 After writing the file, present the generated content as a brief to the user and say:
 > `PROJECT_STATUS.md` has been auto-generated from your project structure. Review the feature statuses and update anything that's inaccurate — then it's ready to use every session.
+
+## Git Hook Status
+
+After presenting the project status (whether it existed or was just generated), check whether the pre-commit hook is installed by running:
+
+```bash
+grep -q "project-status" .git/hooks/pre-commit 2>/dev/null && echo installed || echo missing
+```
+
+- **If `installed`**: append one line to your response:
+  > ✅ Auto-update hook active — PROJECT_STATUS.md, README.md, and CLAUDE.md update automatically on each commit.
+
+- **If `missing`**: append this block to your response:
+  > ⚠️ Auto-update hook not installed for this project.
+  > To enable automatic doc updates on every commit, run:
+  > ```
+  > sh ~/.claude/plugins/marketplaces/personal/plugins/project-status/scripts/install-git-hook.sh
+  > ```
+  > Or say **"install the hook"** and I'll run it for you.
+
+If the user says "install the hook" (or anything similar), run:
+```bash
+sh ~/.claude/plugins/marketplaces/personal/plugins/project-status/scripts/install-git-hook.sh
+```
+Then confirm: "Hook installed. PROJECT_STATUS.md, README.md, and CLAUDE.md will now update automatically before each commit."
