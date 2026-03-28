@@ -4,7 +4,7 @@ A Claude Code plugin that gives Claude instant project context at the start of a
 
 ## How It Works
 
-Each project has a `PROJECT_STATUS.md` file you maintain. It contains:
+Each project has a `PROJECT_STATUS.md` file containing:
 - Project overview and tech stack
 - Key architecture paths
 - Feature status table (✅/🚧/❌)
@@ -13,7 +13,8 @@ Each project has a `PROJECT_STATUS.md` file you maintain. It contains:
 - Known issues and next priorities
 
 At the start of a session: `/project-status` → Claude reads the file → instant context, ready to work.
-At the end of a session: Claude updates the file to reflect what changed.
+
+**No `PROJECT_STATUS.md`?** Claude auto-generates one by scanning your project structure (package.json, src/ layout, git history, README) and writes it for you.
 
 ## Install (One-Time Global Setup)
 
@@ -25,7 +26,9 @@ git clone https://github.com/sampadapokharel/claude_project_status \
 
 The `/project-status` command is now available in every Claude Code project.
 
-## Per-Project Setup (Each New Project)
+## Per-Project Setup (Optional — Each New Project)
+
+If you want to write `PROJECT_STATUS.md` yourself from a template:
 
 ```bash
 # From your project root:
@@ -33,15 +36,33 @@ cp ~/.claude/plugins/marketplaces/personal/plugins/project-status/templates/PROJ
 # Fill in the template with your project's details
 ```
 
+Or just run `/project-status` — if no file exists, Claude will generate one automatically.
+
 ## Usage
 
 ```
 /project-status
 ```
 
-Run this at the start of any Claude Code session. Claude will read `PROJECT_STATUS.md` and brief itself on the project state.
+Run this at the start of any Claude Code session. Claude will:
+- Read `PROJECT_STATUS.md` and brief itself instantly if the file exists
+- Auto-generate `PROJECT_STATUS.md` by scanning your project if it doesn't
 
-If no `PROJECT_STATUS.md` exists in the project, Claude will tell you how to set one up.
+## Auto-Update Before Commits (Optional)
+
+Install the pre-commit hook to have Claude automatically update the **Last Session** section and status flags before every git commit:
+
+```bash
+# From your project root:
+sh ~/.claude/plugins/marketplaces/personal/plugins/project-status/scripts/install-git-hook.sh
+```
+
+After this, every `git commit` will:
+1. Run Claude to read the staged diff
+2. Update `PROJECT_STATUS.md` (Last Session + any changed status flags)
+3. Stage the updated file alongside your commit
+
+Requires `claude` CLI in your PATH (comes with Claude Code).
 
 ## Keeping It Current
 
