@@ -18,13 +18,26 @@ At the start of a session: `/project-status` → Claude reads the file → insta
 
 ## Install (One-Time Global Setup)
 
+**Step 1 — Clone:**
+
 ```bash
-mkdir -p ~/.claude/plugins/marketplaces/personal/plugins
 git clone https://github.com/sampadapokharel/claude_project_status \
   ~/.claude/plugins/marketplaces/personal/plugins/project-status
 ```
 
-The `/project-status` command is now available in every Claude Code project.
+**Step 2 — Run the installer:**
+
+```bash
+bash ~/.claude/plugins/marketplaces/personal/plugins/project-status/install.sh
+```
+
+The script handles everything else: creating the marketplace index, registering the personal marketplace, and running `claude plugin install`.
+
+**Step 3 — Reload VS Code:**
+
+`Cmd+Shift+P` → **Developer: Reload Window**
+
+`/project-status` is now available in every project.
 
 ## Per-Project Setup (Optional — Each New Project)
 
