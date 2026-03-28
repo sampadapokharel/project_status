@@ -3,6 +3,6 @@
   "description": "Provides a /project-status command that reads PROJECT_STATUS.md to instantly brief Claude on any project's current state — no codebase scanning required.",
   "version": "1.0.0",
   "author": {
-    "name": "Sampu"
+    "name": "Sampada Pokharel"
   }
 }

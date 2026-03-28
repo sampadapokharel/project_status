@@ -18,9 +18,9 @@ At the end of a session: Claude updates the file to reflect what changed.
 ## Install (One-Time Global Setup)
 
 ```bash
-mkdir -p ~/.claude/plugins/marketplaces/sampu-plugins/plugins
+mkdir -p ~/.claude/plugins/marketplaces/personal/plugins
 git clone https://github.com/sampadapokharel/claude_project_status \
-  ~/.claude/plugins/marketplaces/sampu-plugins/plugins/project-status
+  ~/.claude/plugins/marketplaces/personal/plugins/project-status
 ```
 
 The `/project-status` command is now available in every Claude Code project.
@@ -29,7 +29,7 @@ The `/project-status` command is now available in every Claude Code project.
 
 ```bash
 # From your project root:
-cp ~/.claude/plugins/marketplaces/sampu-plugins/plugins/project-status/templates/PROJECT_STATUS.md ./PROJECT_STATUS.md
+cp ~/.claude/plugins/marketplaces/personal/plugins/project-status/templates/PROJECT_STATUS.md ./PROJECT_STATUS.md
 # Fill in the template with your project's details
 ```
 
