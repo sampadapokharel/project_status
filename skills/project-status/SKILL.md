@@ -45,9 +45,9 @@ Gather the following (reuse this data for all files that need to be generated):
 
 1. Read `package.json` (or `pyproject.toml`, `Cargo.toml`, `go.mod` — whichever exists) to identify the project name, tech stack, dependencies, and scripts.
 2. Run `git log --oneline -10` to see recent commit history.
-3. Use Glob to discover the top-level source structure (e.g., `src/**/*.ts`, `src/**/`, or equivalent for the language).
+3. Use Glob to discover the full source structure. Then read the actual files for any of the following that exist: entry point, router/navigation config, database/auth/storage client files (e.g. `supabase.ts`, `firebase.ts`), API service files, state store files, type definition files, environment/config files, middleware.
 4. If `README.md` exists, read it for project overview context.
-5. Identify key entry points, navigation/routing files, service/API files, state management, and types.
+5. From what you read, map every significant file to its purpose — this becomes the Key Architecture section.
 
 ### Step 2 — Generate PROJECT_STATUS.md
 
@@ -69,9 +69,10 @@ Write `PROJECT_STATUS.md` to the project root using this structure:
 [Key frameworks and versions from package.json]
 
 ## Key Architecture
-- **Entry point**: [detected]
-- **[Layer name]**: [path] — [what it does]
-(add all meaningful layers: navigation, features, services, state, types, config, utils, DB)
+- **Entry point**: [exact file path — e.g. `src/index.ts`, `App.tsx`]
+- **[Layer name]**: [exact file or directory path] — [what it does]
+
+(This section must be thorough. List every meaningful file and directory Claude would need to navigate the project without scanning. Include: routing/navigation, each external service client (auth, database, storage, payments, etc.), state management files, API layer, type definitions, config/env setup, middleware, and any other non-obvious files. Use specific file paths like `src/services/supabase.ts` — not just `src/services/`.)
 
 ---
 
@@ -100,13 +101,21 @@ Write `PROJECT_STATUS.md` to the project root using this structure:
 ---
 
 ## Known Issues / Open TODOs
-- [ ] Review auto-generated feature statuses above — mark items accurately
+- [ ] [Detected issue — include `file:line` reference where possible]
 
 ---
 
 ## Next Priorities
 1. [Derived from git log or left as placeholder]
 ```
+
+When populating **Known Issues / Open TODOs**, detect real issues from the scan and include specific file paths and line references. Look for:
+- `TODO`, `FIXME`, or `throw new Error('not implemented')` comments in source files
+- Features listed as directories/files with no implementation (empty or stub files)
+- Routes defined but missing handler files
+- Environment variables referenced in config but not documented
+
+Format each item as: `- [ ] [description] (\`path/to/file:line\`)`
 
 ### Step 3 — Generate or update README.md
 

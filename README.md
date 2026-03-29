@@ -72,6 +72,25 @@ Or just run `/project-status` — it will detect if the hook is missing and offe
 
 Requires `claude` CLI in your PATH (comes with Claude Code).
 
+## Writing PROJECT_STATUS.md Manually
+
+You can create `PROJECT_STATUS.md` yourself instead of auto-generating it. If you do, make sure the **Key Architecture** section is thorough — this is what lets Claude navigate your project without scanning.
+
+List specific file paths, not just directories:
+
+```markdown
+## Key Architecture
+- `src/index.ts` — app entry point
+- `src/services/supabase.ts` — Supabase client, auth, and storage setup
+- `src/services/api.ts` — REST API calls
+- `src/store/authStore.ts` — Zustand auth state
+- `src/app/navigation/index.tsx` — root navigation stack
+- `src/types/index.ts` — shared TypeScript types
+- `src/config/env.ts` — environment variables
+```
+
+The more specific your paths, the less Claude needs to explore. A vague entry like `src/services/ — API calls` means Claude still has to scan that directory. A specific entry like `src/services/supabase.ts — Supabase client` means Claude goes straight to the file.
+
 ## Usage
 
 ```

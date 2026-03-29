@@ -30,11 +30,11 @@
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| [Feature 1] | ✅ | Done and fully wired up |
-| [Feature 2] | 🚧 | Started — [what's missing or incomplete] |
-| [Feature 3] | ❌ | Not started |
+| [Feature 1] | Done | Done and fully wired up |
+| [Feature 2] | In Progress | Started — [what's missing or incomplete] |
+| [Feature 3] | Not Started | |
 
-**Legend**: ✅ Done · 🚧 In progress · ❌ Not started
+**Legend**: Done · In Progress · Not Started
 
 ---
 
@@ -42,11 +42,11 @@
 
 | Item | Status | Notes |
 |------|--------|-------|
-| [Database / API setup] | ✅/🚧/❌ | |
-| [Authentication] | ✅/🚧/❌ | |
-| [Data services] | ✅/🚧/❌ | |
-| [State management] | ✅/🚧/❌ | |
-| [Migrations / schema] | ✅/🚧/❌ | [Note if applied to DB or not] |
+| [Database / API setup] | Done/In Progress/Not Started | |
+| [Authentication] | Done/In Progress/Not Started | |
+| [Data services] | Done/In Progress/Not Started | |
+| [State management] | Done/In Progress/Not Started | |
+| [Migrations / schema] | Done/In Progress/Not Started | [Note if applied to DB or not] |
 
 ---
 
@@ -60,8 +60,7 @@
 ---
 
 ## Known Issues / Open TODOs
-- [ ] [Issue or incomplete item — include `file:line` if known]
-- [ ] [Pre-requisite that must be done before testing, e.g. apply DB migrations]
+- [ ] [Issue or task — add your own, or Claude will populate from scan with file:line references]
 
 ---
 
