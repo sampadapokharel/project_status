@@ -14,26 +14,30 @@ With this plugin:
 ## When to Use It
 
 - **Start of every session** — run `/project-status` before anything else
-- **New projects** — Claude auto-generates `PROJECT_STATUS.md` if it doesn't exist yet
-- **Team projects** — the file travels with the repo, so any collaborator gets instant context too
+- **New projects** — Claude auto-generates all missing docs if they don't exist yet
+- **Team projects** — the files travel with the repo, so any collaborator gets instant context too
 
 ## How It Works
 
-Each project has a `PROJECT_STATUS.md` containing:
-- Project overview and tech stack
-- Key architecture paths (what lives where)
-- Feature status table (✅ Done · 🚧 In progress · ❌ Not started)
-- Last session summary
-- Known issues and next priorities
+Each project has three auto-managed files:
 
-`/project-status` reads this file and briefs Claude in seconds. No `PROJECT_STATUS.md`? Claude auto-generates one by scanning your project structure and git history.
+- **`PROJECT_STATUS.md`** — the source of truth for Claude. Contains project overview, tech stack, key architecture paths, feature status table, last session summary, and next priorities.
+- **`README.md`** — human-facing project docs. Auto-generated if missing.
+- **`CLAUDE.md`** — developer architecture reference for Claude. Auto-generated if missing.
+
+`/project-status` reads these files and briefs Claude in seconds. Here's what happens depending on what exists:
+
+| Files present | What the skill does |
+|---|---|
+| All three | Reads and presents `PROJECT_STATUS.md` — no scanning |
+| `PROJECT_STATUS.md` only | Presents it, then generates `README.md` and `CLAUDE.md` from its content |
+| None | Full project scan → generates all three |
+| Only `README.md` | Full scan → generates `PROJECT_STATUS.md` and `CLAUDE.md`; updates README if outdated |
 
 The pre-commit hook keeps everything current automatically — on every commit, Claude analyzes the diff and updates:
 - `PROJECT_STATUS.md` — Last Session + changed status flags
 - `README.md` — Features or setup sections (when features/deps change)
 - `CLAUDE.md` — Architecture sections (when new files or patterns are added)
-
-All three files are created automatically if they don't exist.
 
 ## Install
 
